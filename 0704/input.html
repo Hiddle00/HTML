@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--EUC-KR
+        readonly 속성은 input을 수정할 수 없게 해주는 속성
+        autofocus 속성은 자동으로 focus가 주어져서 입력창이 활성화 되는 속성
+        placeholder 속성은 입력창에 입력해야하는 형식의 힌트를 제공하는 속성
+        disabled 속성은 input을 수정할 수 없고, form 전송에서 제외되는 속성
+        readonly와 disabled의 차이점은 readonly는 입력값을 볼 수 있지만 수정할 수 없고, disabled는 입력값을 볼 수도 수정할 수도 없다.
+        readonly는 form 전송에 포함되지만, disabled는 form 전송에서 제외된다.
+        readonly는 사용자가 입력값을 볼 수 있지만 수정할 수 없고, disabled는 사용자가 입력값을 볼 수도 수정할 수도 없다.
+        required 속성은 해당 input이 필수 입력값임을 나타내는 속성으로, 사용자가 입력하지 않으면 form 전송이 되지 않는다.
+        required 속성은 input이 비어있을 때 form 전송을 막는 역할을 한다.
+        type="text" 속성은 일반 텍스트 입력을 요구하는 속성
+        type="email" 속성은 이메일 형식의 입력값을 요구하는 속성
+
+    -->
+    <form> 
+        <input name="a" type="text" value="hi" readonly><br>
+        <input name="b" type="text" autofocus required><br>
+        <input name="c" type="text" placeholder="닉네임을 입력해주세요."><br>
+        <input name="d" type="text" value="hello" disabled><br> <!-- 입력불가 -->
+        <input name="e" type="email" placeholder="id@xxx.com"><br>
+        <input type="submit" value="전송">
+    </form>    
+</body>
+</html>

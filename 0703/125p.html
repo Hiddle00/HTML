@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>로그인 폼</h3>
+    <hr>
+    <!-- 쿼리 파라미터
+        value 입력창에 기본으로 입력되어있는 값
+        name
+        method get|post - get은 주소창에 입력값이 노출되고, post는 노출되지 않는다.
+    -->
+    <form name="fo" method="get" action="https://search.naver.com/search.naver">
+        사용자 ID : <input type="text" size="15" value="" name="id"><br>
+        비밀번호 : <input type="password" size="15" value="" name="pw"><br>
+        검색어 : <input type="text" name="quary">
+        <input type="submit" value="완료">
+    </form>
+</body>
+</html>
