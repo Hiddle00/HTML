@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        /* css의 주석 */
+        body {
+            background-color: mistyrose;
+        }
+
+        h3 {
+            color: purple;
+        }
+
+        hr {
+            border: 5px dotted yellowgreen;
+        }
+
+        span {
+            color: blue;
+            font-size:  20px;
+        }
+
+        p {
+            color: aqua;
+        }
+
+        body > hr:hover {
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h3>CSS 스타일 맛보기</h3>
+    <hr>
+    <hr style="border: 5px solid mediumaquamarine;">
+    <p>나는 <span>웹 프로그래밍</span>을 좋아합니다.</p>
+
+    <form action="/examples/media/action_target.php" method="get">
+    여러분의 나이대를 골라보세요.<br>
+        <input type="radio" name="ages" id="teen" value="teenage">
+        <label for="teen">10대</label><br>
+        <input type="radio" name="ages" id="twenty" value="twenties">
+        <label for="twenty">20대</label><br>
+        <input type="radio" name="ages" id="thirty" value="thirties">
+        <label for="thirty">30대</label><br>
+        <input type="radio" name="ages" id="forty" value="forties">
+        <label for="forty">40대 이상</label><br>
+        <input type="submit">
+    </form>
+</body>
+</html>

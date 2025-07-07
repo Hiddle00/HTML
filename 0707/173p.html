@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 전체 셀렉터 */
+        * {
+            background-color: ivory;
+            margin: 0;
+        }
+
+        /* 속성 선택자 */
+        input[type=text]{
+            color: darkred;
+        }
+
+        input[type=password]{
+            color: chocolate;
+        }
+
+        /* 가상 선택자 */
+        a:visited{
+            color: green;
+        }
+
+        li:hover{
+            background-color: yellowgreen;
+        }
+
+        div > span {
+            color: darkorchid;
+        }
+
+        #id > input:hover{
+            background-color: darkcyan;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="id">
+            <span>아이디</span>
+            <input type="text">
+        </div>
+        <div>
+            <span id="pw">비밀번호</span>
+            <input type="password">
+        </div>
+        <ul>
+            <li>공부</li>
+            <li>게임</li>
+            <li>운동</li>
+        </ul>
+        <a href="http://www.naver.com">네이버</a>
+    </div>
+</body>
+</html>

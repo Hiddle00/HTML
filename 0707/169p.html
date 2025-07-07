@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        @import "external.css";
+
+        /* 태그 선택자(태그 이름 선택자) */
+        h3 {
+            color: brown;
+        }
+
+        li {
+            color: brown;
+        }
+
+        /* 여러 선택자에 한번에 스타일을 적용하려면 ,(쉼표)로 구분해서 나열한다 */
+        h3, li {
+            color: brown;
+        }
+
+        /* 클래스 선택자 */
+        .a {
+            background-color: aqua;
+        }
+
+        .c {
+            color: blue;
+        }
+
+        /* id 선택자 */
+        #list {
+            background-color: yellowgreen;
+        }
+
+        #content {
+            color: red;
+        }
+
+        .b {
+            color: mediumslateblue;
+        }
+    </style>
+</head>
+<body>
+    <!-- html파일 내에 중복되는 id속성의 값은 존재해서는 안된다. -->
+    <h3 class="a">Wdb Programming</h3>
+    <hr>
+    <div>
+        <div id="content">2학기 <strong class="b">학습 내용</strong></div>
+        <ul id="list">
+            <li class="c">HTML5</li>
+            <li><strong>CSS</strong></li>
+            <li class="c">JAVASCRIPT</li>
+        </ul>
+        <div>60점 이하는 F!</div>
+    </div>
+
+    <div>
+        hi
+        <div>
+            hello
+        </div>
+    </div>
+</body>
+</html>

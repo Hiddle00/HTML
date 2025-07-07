@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>셀렉터 만들기</title>
+    <style>
+        /* 셀렉터 조합하기 */
+        /* 자식 셀렉터 */
+        /* 직계 자식만 찾을 수 있다. */
+        div > strong {
+            color: dodgerblue;
+        }
+
+        div > #f {
+            color: coral;
+        }
+
+        div > ul > li {
+            color: darkcyan;
+        }
+
+        /* 자손 선택자 */
+        div strong {
+            color: darkgoldenrod;
+        }
+
+        ul strong {
+            color: crimson;
+        }
+    </style>
+</head>
+<body>
+    <h3>Wdb Programming</h3>
+    <hr>
+    <div>
+        <div>2학기 <strong>학습 내용</strong></div>
+        <ul>
+            <li>HTML5</li>
+            <li><strong>CSS</strong></li>
+            <li>JAVASCRIPT</li>
+        </ul>
+        <div id="f">60점 이하는 F!</div>
+    </div>
+
+</body>
+</html>
