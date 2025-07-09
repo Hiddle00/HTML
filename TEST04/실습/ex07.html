@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /* 이미지를 삽입 할 때는 " 빼먹었는지 확인 할 것 */
+        /* div에 이미지를 삽입 할 때는 width와 height(크기)를 정해줘야 한다. */
+        td > div {
+            background-size: 312px 441px;
+            background-image: url("back.png");
+            background-repeat: no-repeat;
+        }
+        td > div:hover {
+            background-size: 312px 441px;
+            background-image: url("../../자료/예제의 미디어 파일들/5장/media/spade-7.png");
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table>
+            <tr height="500px">
+                <td>마우스를 올리면 카드의 앞면이 보인다.</td>
+                <td width="500px">
+                    <div class="a">&nbsp;<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        <!-- <img src="../../자료/예제의 미디어 파일들/5장/media/back.png" alt="뒷면"> -->
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
