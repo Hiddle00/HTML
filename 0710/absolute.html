@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            background-color: rgb(139, 243, 191);
+        }
+        #a {
+            position: absolute;
+            width: 100px;
+            background-color: linen;
+            bottom: 0px;
+            left: 50px;
+        }
+        #b {
+            background-color: cadetblue;
+            width: 300px;
+            height: 300px;
+            margin-top: 10px;
+            position: static;
+            display: inline-block;
+        }
+        #b > div {
+            width: 20px;
+            height: 20px;
+        }
+        #c {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="a">절대 위치</div>
+    <div>div</div>
+    <div id="b">
+        <div id="c">div2</div>
+    </div>
+
+</body>
+</html>
