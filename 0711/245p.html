@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전환</title>
+    <style>
+        /* transition은 요소(css속성)의 상태가 바뀔 때 부드럽게 전환하도록 만들어주는 속성 */
+        /* transition : [속성] [지속시간] [타이밍함수] [지연시간] */
+        /* 
+            타이밍 함수 
+            liner : 일정한속도
+            ease : 처음과 끝은 부드럽고 중간은 빠름(디폴트)
+            ease-in : 천천히 시작
+            ease-out : 천천히 끝냄
+            ease-in-out : 천천히 시작하고 천천히 끝냄
+         */
+        span {
+            color: red;
+            transition: font-size 2s, color 2s, linear 2s;
+        }
+        span:hover {
+            font-size: 500%;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h3>font-size에 대한 전환</h3>
+    <hr>
+    <p>
+        <span>꽝!</span>글자에 마우스를 올려보세요.
+    </p>
+</body>
+</html>

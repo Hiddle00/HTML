@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .search_area {
+            position: absolute;
+            top: 52px;
+            left: 50%;
+            z-index: 10;
+            width: 706px;
+            border: 1px solid #03c75a;
+            border-radius: 33px;
+            background-color: #fff;
+            -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="search_area" class="search_area" style="border-color: #5cc85b">
+        <div class="search_group">
+            <div id="search" class="search_group_inner type_special_logo_full">
+                <h1 id="special-input-logo" class="search_logo">
+                    <a href="/" class="link_naver type_motion_n is_fadein">
+                        <span class="ico_n_logo_svg">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: rgb(92, 200, 91);">
+                                <path d="M16.273 12.845 7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727v12.845z"></path>
+                            </svg>
+                        </span>
+                        <span class="blind">NAVER</span>
+                    </a>
+                </h1>
+                <form id="sform" name="search" role="search" action="https://search.naver.com/search.naver" method="get">
+                    <fieldset>
+                        <legend class="blind">검색</legend>
+                        <input type="hidden" name="where" value="nexearch">
+                        <input type="hidden" id="sm" name="sm" value="top_hty">
+                        <input type="hidden" id="fbm" name="fbm" value="0">
+                        <input type="hidden" id="acr" name="acr" value="" disabled="disabled">
+                        <input type="hidden" id="acq" name="acq" value="" disabled="disabled">
+                        <input type="hidden" id="qdt" name="qdt" value="" disabled="disabled">
+                        <input type="hidden" id="ie" name="ie" value="utf8">
+                        <input type="hidden" id="acir" name="acir" value="" disabled="disabled">
+                        <input type="hidden" id="os" name="os" value="" disabled="disabled">
+                        <input type="hidden" id="bid" name="bid" value="" disabled="disabled">
+                        <input type="hidden" id="pkid" name="pkid" value="" disabled="disabled">
+                        <input type="hidden" id="eid" name="eid" value="" disabled="disabled">
+                        <input type="hidden" id="mra" name="mra" value="" disabled="disabled">
+                        <div class="search_input_box">
+                            <input id="query" name="query" type="search" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." maxlength="255" autocomplete="off" class="search_input" data-atcmp-element="">
+                        </div>
+                        <button type="submit" class="btn_search" onclick="window.ntm.push({event:&quot;nclick&quot;,el:this,click_area:&quot;sch.action&quot;})">
+                            <span class="ico_btn_search_svg">
+                                <svg id="search-btn" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" class="ico_btn_search type_color" style="fill: #5cc85b">
+                                    <path d="M22.13.5c11.378 0 20.632 9.256 20.632 20.63 0 4.699-1.566 9.155-4.439 12.782l10.164 10.165a2.41 2.41 0 0 1-1.706 4.115 2.412 2.412 0 0 1-1.706-.705L33.31 35.719a2.41 2.41 0 0 1 0-3.41 15.71 15.71 0 0 0 4.628-11.178c0-8.718-7.09-15.808-15.807-15.808-8.718 0-15.808 7.09-15.808 15.808 0 7.15 4.817 13.43 11.714 15.273a2.41 2.41 0 0 1 1.705 2.954 2.41 2.41 0 0 1-2.95 1.705C7.788 38.658 1.5 30.46 1.5 21.131 1.5 9.756 10.756.5 22.13.5zm4.716 34.746a3.483 3.483 0 1 1 0 6.966 3.483 3.483 0 0 1 0-6.966z"></path>
+                                </svg>
+                            </span>
+                            <span class="blind">검색</span>
+                        </button>
+                    </fieldset>
+                    <input type="hidden" name="ackey" value="p7tdx128">
+                </form>
+                <div class="search_box">
+                    <button id="ke_kbd_btn" type="button" class="btn_keyboard" aria-pressed="false"> <span class="keybord_text"> <span class="blind">입력도구</span> </span> </button> <div id="_nx_kbd" style="display:none"></div> <button id="nautocomplete" type="button" class="btn_arrow" data-atcmp-element=""> <span class="blind">자동완성/최근검색어펼치기</span> </button> </div> <div class="layer_atcmp" id="autoFrame" style="display:none"><div class="ly_atcmp" data-atcmp-element="">
+    <div class="api_atcmp_wrap">
+      <!-- 최근검색어 -->
+      <div class="atcmp_fixer recent _recent_layer" style="display: none">
+        <div class="atcmp_header _recent_header">
+          <strong class="tit">최근검색어</strong>
+          <div class="option">
+            <a role="button" href="#" class="item _delAll" aria-pressed="false">전체삭제</a>
+          </div>
+        </div>
+        <div class="atcmp_container">
+          <ul class="kwd_lst _recent"></ul>
+          <!-- [D] 검색어 저장 꺼진 경우 atcmp_fixer에 type_off 추가 -->
+          <div class="kwd_info kwd_off _offMsg" style="display: none">검색어 저장 기능이 꺼져 있습니다.<br><span class="kwd_dsc">설정이 초기화 된다면 <a href="https://help.naver.com/alias/search/word/word_35.naver" target="_blank" class="kwd_help" data-clk="sly.help">도움말</a>을 확인해 주세요.</span>
+          </div>
+          <!-- [D] 검색어 내역 없는 경우 atcmp_fixer에 type_off 추가 -->
+          <div class="kwd_info kwd_none _recentNone" style="display: none">최근 검색어 내역이 없습니다.<br><span class="kwd_dsc">설정이 초기화 된다면 <a href="https://help.naver.com/alias/search/word/word_35.naver" target="_blank" class="kwd_help" data-clk="sly.help">도움말</a>을 확인해 주세요.</span>
+          </div>
+        </div>
+        <div class="atcmp_footer">
+          <span class="side_opt_area">
+            <span class="opt_item"><a href="#" class="close _keywordOnOff">자동저장 끄기</a></span>
+            <span class="opt_item"><a href="https://help.naver.com/support/alias/search/word/word_35.naver" target="_blank" data-clk="sly.help">도움말</a></span>
+          </span>
+          <span class="rside_opt_area">
+            <span class="opt_item"><a href="#" class="close _close">닫기</a></span>
+          </span>
+        </div>
+      </div>
+      <!-- 자동완성 -->
+      <div class="atcmp_fixer _atcmp_layer" style="display: none">
+        <div class="atcmp_container _words">
+          <ul class="kwd_lst _kwd_list"></ul>
+          <!-- [D] 선거안내문구 -->
+          <div class="atcmp_alert _alert">
+            <div class="dsc_election">
+              <p class="dsc">
+                <i class="imgsvg ico_election"></i>
+                <span class="_alert_passage"></span>
+              </p>
+              <span class="dsc_inner _alert_passage2"></span>
+              <a href="#" target="_blank" class="link _alert_link">자세히보기</a>
+            </div>
+          </div>
+
+          <div class="atcmp_plus _plus">
+            <div class="dsc_plus">
+              <a href="https://help.naver.com/alias/search/word/word_16.naver" target="_blank" class="link_dsc" data-clk="sug.cxhelp">관심사를 반영한 컨텍스트 자동완성<i class="imgsvg ico_help">도움말</i></a>
+            </div>
+            <div class="switch">
+              <!-- [D] 선택시 aria-pressed="ture/false" -->
+              <a role="button" href="#" class="bt_switch active _plus_btn" aria-pressed="false"><i class="imgsvg ico_option">컨텍스트 자동완성</i></a>
+            </div>
+            <div class="layer_plus _plus_layer">
+              <strong class="tit">컨텍스트 자동완성</strong>
+              <div class="_plus_layer_isloggedin" style="display: none">
+                <p class="dsc">ON/OFF 설정은 해당기기(브라우저)에 저장됩니다.</p>
+                <div class="btn_area">
+                  <a href="https://help.naver.com/alias/search/word/word_16.naver" target="_blank" class="link_view" data-clk="sug.cxlink">자세히 보기</a>
+                </div>
+              </div>
+              <div class="_plus_layer_isnotloggedin" style="display: none">
+                <p class="dsc">동일한 시간대・연령대・남녀별 사용자 그룹의 관심사에 맞춰 자동완성을 제공합니다. <a href="https://help.naver.com/alias/search/word/word_16.naver" target="_blank" class="link_view" data-clk="sug.cxlink">자세히 보기</a></p>
+                <div class="btn_area">
+                  <a href="https://nid.naver.com/nidlogin.login" class="btn_login" data-clk="sug.cxlogin"><i class="imgsvg ico_naver">네이버</i>로그인</a>
+                </div>
+              </div>
+              <a href="#" role="button" class="btn_close _plus_layer_close" onclick="return tCR('a=sug.cxhide');"><i class="imgsvg ico_close">컨텍스트 자동완성 레이어 닫기</i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="atcmp_footer">
+          <span class="side_opt_area">
+            <span class="opt_item"><a href="#" class="close _suggestOnOff">자동완성 끄기</a></span>
+            <span class="opt_item"><a href="https://help.naver.com/alias/search/word/word_17.naver" target="_blank" data-clk="sug.help">도움말</a></span>
+            <span class="opt_item"><a href="https://help.naver.com/alias/search/word/word_18.naver" target="_blank" class="report" data-clk="sug.report">신고</a></span>
+          </span>
+          <span class="rside_opt_area">
+            <span class="opt_item"><a href="#" class="close _close">닫기</a></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div></div> </div> </div> </div>
+</body>
+</html>
