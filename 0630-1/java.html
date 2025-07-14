@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+programming
+programmer
+program 컴퓨터가 문제를 해결하기 위한 단계를 모아놓은 
+processor 메모리에 
+process
+algorithm 문제를 해결하기 위한 단계적 논리 구조
+
+기획
+웹디자이너
+웹퍼블리셔
+
+풀스택
+프론트엔드
+백엔드
+==>용어 정리
+==>자바 chap.1 학습
+
+-알고리즘-
+
+1.순차구조
+문제1 : 반지름이 10인 원의 넓이를 구하는 컴퓨터 프로그램 논리를 작성하시오
+
+반지름(r) = 10
+원의 넓이 = pi r ^2
+출력(원의 넓이)
+
+문제2 : 변의 길이가 각각 3이고 4인 직각삼각형의 빗변의 길이를 구하는 프로그램 논리를 작성하시오
+
+변1 =3
+변2 =4
+빗변= root(변1^2+변2^2)
+출력(빗변길이)
+
+
+2.선택구조 - if문 (순차도에서 갈래길)
+문제2 : 25라는 숫자값이 짝수인지 홀수인지 검사하는 컴퓨터 프로그램 논리를 작성하시오.
+5 / 2 = 2(몫) + 1
+25 % 2 = 1(나머지) - 나머지 = 숫자 % 2
+만약 나머지가 0이면 "짝수"입니다.
+그렇지 않으면 "홀수"입니다.
+<!-- 의사(유사)코드(슈도코드, pseudocode) -->
+num = 25 할당
+mod = num % 2
+if mod == 0 비교
+    짝수 출력
+else
+    홀수 출력
+
+문제3 : 어떤 사람의 나이가 10살 미만이거나, 60세 이상이면 버스를 공짜로 승차하고, 그렇지 않으면 교통비를 지불한다. 를 컴퓨터 프로그램 논리로 작성하시오.
+
+나이 = 18
+만약 나이 < 10 
+그리고 나이 > 60 이면
+    무료 승차
+그렇지 않으면 
+    교통비 지불
+
+age = 18
+if age < 10 
+and age > 60 then
+    무료 승차
+else
+    교통비 지불
+    
+3. 반복구조 - loop문 for문
+x = 1
+반복시작: <-- rable -->
+    x' = x + 1
+
+
+
+x = 1, s = 0
+while(loop)
+{
+    s' = s + x
+    x' = x + 1
+    if x > 10 then
+      loop out (exit loop)
+}
+x'= 11
+s'= 55
+
+
+2.
+x = 0, s = 0
+while(loop)
+{
+    s' = s + x
+    x' = x + 2
+    if x > 100 then
+        exit loop
+}
+
+</body>
+</html>
