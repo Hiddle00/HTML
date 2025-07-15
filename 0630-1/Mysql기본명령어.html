@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    데이터- 
+    
+    정보- 데이터를 바탕으로 도출된 결론?
+
+    메타데이터
+
+
+    데이터 행
+
+    DBMS 데이터베이스 관리 시스템
+    스키마{ 아래의 게시판(ex네이버까페)(myspl에선 그냥 데이터베이스로 부름)
+        테이블- html의 그것(게시글,사용자)
+        sql 구조적 질의 언어 (structure quary lang)
+            select 나이,성별,이름 form 사용자
+            <!-- 사용자 테이블에서 나이,성별,이름 데이터를 가져오라 -->
+            insert into 사용자(나이,성별,이름)
+            <!-- 사용자 테이블에 나이,성별,이름의 값을 채운다 -->
+            values(20,'남','임꺽정')
+            <!-- 순서대로 . 값을 넣으면 행이 추가된다. -->
+            Update 사용자 set 나이 = 20 where 이름='홍길동'
+            <!-- 조건이 없으면 모든 값을 수정한다. -->
+            delete from 사용자 where 나이=20;
+            구문(where) - 필터
+        }
+    CRUD의 도구 - DBMS
+
+    MySQL - R(relationship?)DBMS
+    cmd창- 클라이언트. 설치한 서버로 접속함.
+    mysql -u root -p - root유저 권한으로 pw를 사용하여 접속요청
+    1:N, 1:1, N:M 관계등이 있음.
+
+    <!-- 
+        documentDBMS 
+        사용자 페이지에 모든 정보를 기술
+    -->
+
+
+    mysql 서버 접속 명령어
+    [반드시 필요]
+    {옵션}
+    mysql -u [계정이름] -p {-h 서버IP(안쓰면 내컴퓨터 IP)}
+            {-P(포트, 없으면3306)}
+
+    --실제
+    myspl -u root -p
+
+    --예시
+    mysql -u root -p -h 192.168.0.25 -P 3307
+    192.168.0.25 IP의 3307포트에서 동작중인 mysql 데이터베이스서버에 root계정으로 비밀번호를 사용하여 접속
+
+    myspl의 모든 명령에는 끝에 세미콜론(;)이 있어야한다.
+    1.myspl데이터베이스 서버의 모든 스키마를 조회하는 명령어
+    show databases;
+
+    2.데이터베이스 선택 명령어
+    use [데이터베이스 이름];
+    --실제
+    use mysql;
+    mysql테이터베이스를 선택한다.
+    데이터는 데이터베이스 안의 테이블에 들어있기 때문에 특정 테이블의 데이터를 조회하기 위해서는 해당 테이블이 들어있는 데이터베이스를 선택해야 한다.
+</body>
+</html>
