@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    SQL(Structured Queay language, 구조적 질의어)
+    DBMS에서 사용하는 명령어
+
+    1.DDL(Data Definition Language, 데이터 정의어)
+    데이터베이스 내에서 개체(Entity, 데이터베이스, 테이블)들을 생성하거나, 수정하거나, 삭제하는 명령어들의 집합
+
+    1-1.CREATE
+    새로운 개체를 생성하는 명령어
+    1-1-1.데이터베이스 개체 생성
+    create database {if not exists} [데이터베이스이름] {incording}
+    --실제
+    create database ezen;
+    ezen이라는 이름의 데이터베이스 생성
+    1-1-2. 테이블 개체 생성
+    create table {if not exists} [테이블이름](
+    [컬럼이름1] [데이터타입] {제약조건},
+    [컬럼이름2] [데이터타입] {제약조건},
+    ......
+    [컬럼이름n] [데이터타입] {제약조건}
+    ){테이블 옵션};
+
+
+        (할당된 공간을 모두 쓰지않아도 할당되어 있기 )
+        var(valuable)char - 사용하지 않은 공간은 자동으로 반환함. 길이제한이 있음.
+        text
+      --문자열 타입
+        tinyint(db의 true,false)
+    자주 쓰이는 데이터 타입
+    varchar: 문자열. 컬럼에 들어가는 데이터가 문자열일때 사용한다.
+             저장공간을 절약하기 좋다.
+    ex) varchar(20)은 최대 20byte의 문자열을 저장할 수 있다.
+        이 때, 저장하는 데이터가 10byte라면 나머지 공간 10byte를 쓰지 않고 공간을 축소한다.
+    text: 문자열. 컬럼에 들어가는 데이터가 문자열이고, 최대 길이(크기)를 알 수 없을때 사용한다.
+    int: 컬럼에 들어가는 데이터가 정수일 때 사용한다.(2^64를 넘을 수 있음)
+    double: 실수. 컬럼에 들어가는 데이터가 실수일 때 사용한다.
+    timestamp / datetime: 날짜. 컬럼에 들어가는 데이터가 날짜일때 사용한다.
+    (ms단위, 1970.01.01 기준으로 )
+    --실제
+    use ezen;
+    create table users(
+        id char(100),
+        pw char(100),
+        age int,
+        nick char(20)
+    );
+
+    --
+    use board;
+    create table board(
+        title varchar(255),
+        content text,
+        user varchar(255),
+        no int,
+        write_date timestamp,
+        Update_date timestamp
+    );
+
+    --제약조건을 추가한 테이블 생성
+    --회원테이블
+    create table user(
+        id varchar(255) primary key not null, 
+        pw varchar(255) not null,
+        name varchar(255) not null,
+        create_date timestamp not null default now(),
+        update_date timestamp null
+    );
+
+        행 추가 : user테이블
+    insert into user(id, pw, name)
+    values('hong', '1234', '홍길동');
+
+    insert into user(id, pw, name)
+    values('jeon', '1234', '홍길동');
+
+    insert into user(id, pw, name)
+    values('hong', '4321', '홍수아'); <!--pri중복 에러-->
+
+    insert into user(id, pw)
+    values('id', '4321');             <!--null불가 에러-->
+
+    insert into user(id, pw, name)
+    values('id', '4321', null);        <!--null값 지정안됨?-->
+
+
+    --게시글테이블
+    use board;
+    create table board(
+        no int primary key auto_increment,
+        title varchar(255) not null,
+        content text not null,
+        user varchar(255) not null,
+        create_date timestamp default now(),
+        update_date timestamp 
+    );                       <!--pri는 not null을 포함하고 있음-->
+            <!--auto_increment:순차번호를 부여한다.정수형만 가능-->
+    insert into board(no, title, content, user)
+    values(1, '가입했어요', 'hi', 'kim'); 
+
+    insert into board(no, title, content, user)
+    values(5, '2번이 싫어요', '5번게시글', 'hong');
+                        <!--pri를 사용자가 작성하면 x-->
+    insert into board(title, content, user)
+    values('제목    1', '본문   1', 'kim');
+    select *from board; <!--와일드카드-->
+
+    1-2.DROP
+    개체를 삭제하는 명령어
+    
+    1-2-1.데이터베이스 삭제
+    drop database {if exists} [데이터베이스이름] 
+    --실제
+    drop database ezen;
+    ezen이라는 이름의 데이터베이스 삭제
+
+    1-2-2. 테이블 삭제
+    drop table {if exists} [테이블이름]
+    --실제
+    drop table board;
+    1-3.ALTER
+    개체를 수정하는 명령어
+    1-4.TRUNCATE
+    개체를 재생성(삭제 후 생성)하는 명령어
+
+    2.DML(Data Manipulcation Language, 데이터 조작어)
+    3.DCL(Data Control Language, 데이터 제어어)
+    4.TCL(Transaction control Language, 트랜잭션 제어어)db에서 작업하는 단위
+
+
+
+    table을 만들때는 첫행에 들어갈 컬럼들과 데이터 타입들을 지정해 주어야한다
+    cmd상에서 만들어진 명령어 문법-쿼리문
+  --제약조건 <!-- 데이터타입 뒤에 오면 전부 제약조건 -->
+        겹치면 x
+        비어있으면 x
+        자동으로 입력해야한다
+        작성한 순서대로 자동증가해서 기입해야한다
+    테이블에 데이터가 입력(insert)될 때 입력 데이터에 대해 제약되는 방식을 정의한 조건
+        primary key: 각 행을 고유하게 식별하는 제약조건(기본키)
+        해당 컬럼에 중복값이 허용되지 않고, null값도 허용하지 않는다.
+        auto_increment: 데이터가 입력될 때 자동으로 1부터 1씩 증가하는 순차번호가 입력된다. pri키+정수컬럼에만 사용가능
+        not null:해당컬럼에 null값을 허용하지 않는다. 컬럼에 제약조건이 없으면 null값을 허용한다.
+        default: 해당컬럼에 값이 입력되지 않으면 null대신 기본값을 입력한다.
+        foreign key:외래키.해당컬럼에 올 수 있는 값은 반드시 다른 테이블의 참조하고 있는 컬럼의 값중에 하나여야 한다.(참조키)
+        테이블간의 관계를 맺어주는 rDBMS의 메인.
+
+
+
+    게시판
+    게시글 저장공간
+    게시글 저장 테이블(table)
+        제목    -> title        > 문자열    빈값금지
+        내용    -> content      > 문자열    빈값금지
+        작성자  -> user         > 문자열    빈값금지
+        글번호  -> no           > 정수 <!--관례상 pri컬럼을 제일 위에 놓는다.-->                     중복금지,빈값금지
+        작성일  -> write_date   > 날짜      빈값금지,기본값
+        게시글 수정일(수정됨태그) ->update_date  > 날짜(timestamp)
+                                           기본값
+     --컬럼   
+
+    회원정보
+    아이디(id) / varchar(255) / 중복불가, 빈값금지
+    비밀번호(pw) / varchar(255) / 빈값금지
+    이름(name) / varchar(255) / 빈값금지
+    가입일(create_date) / timestamp / 빈값금지, 기본값
+    수정일(update_date) / timestamp / 빈값허용
+
+    회원정보 저장공간 (로그인 사용자만 가능하다면)
+    댓글 저장공간
+    즐겨찾기 저장공간
+</body>
+</html>
