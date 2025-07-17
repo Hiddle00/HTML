@@ -87,7 +87,7 @@
     values('id', '4321');             <!--null불가 에러-->
 
     insert into user(id, pw, name)
-    values('id', '4321', null);        <!--null값 지정안됨?-->
+    values('id', '4321', null);        <!--null값 지정불가?-->
 
 
     --게시글테이블
@@ -111,6 +111,35 @@
     values('제목    1', '본문   1', 'kim');
     select *from board; <!--와일드카드-->
 
+    --실제3
+    user 테이블과 board테이블을 생성하고 테이블간의 관계를 맺는다.
+    create database board;
+    use board;
+    create table user(
+        id varchar(255) primary key,
+        pw varchar(255) not null,
+        name varchar(255) not null,
+        age int,
+        height double
+    );
+    insert into user(id, pw, name, age, height)
+    values('hong','1234','홍길동', 20, 170.5 );
+    select *from user;
+    insert into user(id, pw, name, age, height)
+    values('sung','4321','성춘향', 20, 168.5 );
+
+    create table board(
+        title varchar(255) not null,
+        content text not null,
+        no int primary key auto_increment,
+        author varchar(255),
+        create_date timestamp default now(),
+        update_date timestamp ,
+        hit int default 0,
+        foreign key(author) references user(id)
+    );
+    insert into board(title, content, author)
+    values('안녕하세요', '반갑습니다.', 'kim');
     1-2.DROP
     개체를 삭제하는 명령어
     
@@ -137,7 +166,7 @@
 
     table을 만들때는 첫행에 들어갈 컬럼들과 데이터 타입들을 지정해 주어야한다
     cmd상에서 만들어진 명령어 문법-쿼리문
-  --제약조건 <!-- 데이터타입 뒤에 오면 전부 제약조건 -->
+  --제약조건(CONSTRAINT) <!-- 데이터타입 뒤에 오면 전부 제약조건 -->
         겹치면 x
         비어있으면 x
         자동으로 입력해야한다
@@ -147,7 +176,7 @@
         해당 컬럼에 중복값이 허용되지 않고, null값도 허용하지 않는다.
         auto_increment: 데이터가 입력될 때 자동으로 1부터 1씩 증가하는 순차번호가 입력된다. pri키+정수컬럼에만 사용가능
         not null:해당컬럼에 null값을 허용하지 않는다. 컬럼에 제약조건이 없으면 null값을 허용한다.
-        default: 해당컬럼에 값이 입력되지 않으면 null대신 기본값을 입력한다.
+        default: 해당컬럼에 대해 값이 입력되지 않으면 null대신 기본값을 입력한다.
         foreign key:외래키.해당컬럼에 올 수 있는 값은 반드시 다른 테이블의 참조하고 있는 컬럼의 값중에 하나여야 한다.(참조키)
         테이블간의 관계를 맺어주는 rDBMS의 메인.
 
@@ -171,6 +200,22 @@
     이름(name) / varchar(255) / 빈값금지
     가입일(create_date) / timestamp / 빈값금지, 기본값
     수정일(update_date) / timestamp / 빈값허용
+
+    사용자(user)
+    아이디 id varchar(255)
+    비밀번호 pw varchar(255)
+    이름 name varchar(255)
+    나이 age int
+    키 height double
+
+    게시판(board)
+    제목(title)
+    본문(content)
+    번호(no)
+    작성자(author)
+    작성일(create_date)
+    수정일(update_date)
+    조회수(hit)
 
     회원정보 저장공간 (로그인 사용자만 가능하다면)
     댓글 저장공간

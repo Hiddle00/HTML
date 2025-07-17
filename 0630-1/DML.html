@@ -1,0 +1,65 @@
+DML(Data Manipulcation Language, 데이터 조작어)
+데이터베이스에서 데이터를 조작(CRUD)하기 위해서 사용되는 SQL 명령어의 집합
+
+CRUD: 기본적인 데이터 처리기능을 묶어서 일컫는 말
+C:CREATE / 생성 / insert
+R:READ / 조회 / select
+U:UPDATE / 수정 / update
+D:DELETE / 삭제 / delete
+
+1.insert
+새로운 데이터를 테이블에 삽입(입력)한다.
+
+insert into [테이블이름](컬럼1,컬럼2,컬럼3...)values(값1,값2);
+
+1-1. user테이블에 새로운 데이터 추가
+insert into user(id,pw,name)values('jeon','1234','전우치');
+
+1-2. 테이블에 새로운 데이터 추가(에러)
+1-2-1. 제약조건 위반(not null)
+insert into user(id,pw)values('kim','pw');
+1-2-2. 제약조건 위반(primary key)
+insert into user(id,pw,name)values('sung','1234', '성유리');
+1-2-3. 타입 위반
+insert into user(id,pw,name)values(lee, 1234, 이몽룡);
+1-2-4. 컬럼개수 값 개수 불일치
+insert into user(id,pw,name)values('lee','1234');
+1-2-5. 제약조건 위반(foreign key)
+insert into board(title, content, author)
+values('hi', 'hello', 'jeong');
+
+2. select
+데이터를 테이블에서 조회한다.
+
+select [컬럼1,컬럼2,...컬럼n]or* from [테이블이름];
+
+2-1. user 테이블에 있는 모든 컬럼, 모든행을 조회
+select id,pw,name,age,height from user;
+select *from user;
+* -> 아스트릭스,와일드카드
+=조회하는 테이블의 모든 컬럼
+2-2. board테이블에 있는 title, content, author컬럼의 모든 행을 조회
+select title, content, author from board;
+
+3. update
+특정 컬럼의 데이터를 테이블에서 수정한다.
+
+update [테이블이름] set [컬럼1 = 값1, 컬럼2 = 값2];
+
+3-1. user테이블의 age컬럼의 값을 25로 수정
+update user set age = 25;
+3-2. user테이블의 pw컬럼의 값을 '1234'로 수정하고,
+        height컬럼의 값을 178.5로 수정
+update user set pw = '1234', height = 178.5;
+
+4.delete
+특정 데이터를 포함하고 있는 행을 테이블에서 삭제한다.
+
+delete from [테이블이름]
+
+4-1. user테이블의 데이터 삭제
+delete from user;
+<!-- 해당 테이블의 컬럼?을 외부에서 참조 중일경우 삭제불가. -->
+<!-- 하위테이블을 먼저 지워줘야 한다. -->
+4-2. board테이블의 데이터 삭제
+delete from board;
