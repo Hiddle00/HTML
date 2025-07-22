@@ -139,11 +139,11 @@ select *from user where name like '홍%';
 select *from user where name like '%ㄱ%';
 
 7. 행 수 제한
-조회할 데이터의 수를 강제로 제한한다.
+조회할 행의 수를 강제로 제한한다.
 #문법
 limit {시작(행)번호,} [개수]
 
-7-1. user테이블에서 하나의 데이터만 조회
+7-1. user테이블에서 하나의 행만 조회
 select *from user limit 1;
 7-2. user테이블에서 두개의 데이터만 조회
 select *from user limit 2;
@@ -193,17 +193,117 @@ select *from user order by height desc;
 select *from user order by id;
 10-5. user테이블에서 id컬럼 기준으로 내림차순 정렬하여 조회
 select *from user order by id desc;
+10-6. board테이블에서 hit컬럼 기준으로 내림차순 정렬
+select *from board order by hit desc;
+
+10-7. board테이블에서 hit컬럼 기준으로 내림차순 정렬하고, 동일한 조회수를 가지는 경우 no컬럼 기준으로 내림차순 정렬
+select *from board order by hit desc, no desc;
+10-8. board테이블에서 author컬럼 기준으로 내림차순 정렬하고, 동일한 author를 가지는 경우 no컬럼 기준으로 내림차순 정렬
+select *from board order by author desc, no desc;
 
 11. 중간통합
 where, limit와 order by는 하나의 쿼리에서 사용 가능하다.
 11-1. user테이블에서 pw가 1234인 행을 찾아 조회하고 id컬럼 기준으로 내림차순 정렬하여 조회
 select *from user where pw='1234' order by id desc;
-11-2. board테이블에서 author컬럼에 'e'가 포함된 행을 찾아 조회하고 create_date컬럼 기준으로 내림차순 정렬하여 조회<!--최근순-->
+11-2. board테이블에서 author컬럼에 'e'가 포함된 행을 찾아 조회하고 create_date컬럼 기준으로 내림차순 정렬하여 조회 <!--최근순-->
 select *from board where author like '%e%' order by create_date desc;
 11-3. board테이블에서 no컬럼 기준으로 내림차순 정렬하고 0번째 행부터 하나의 데이터만 조회
 select *from board order by no desc limit 0,1;
 11-4. board테이블에서 hit컬럼의 값이 0이상인 행을 조회하고, title컬럼 기준으로 오름차순 정렬한 뒤, 1번째 행부터 3개의 데이터만 조회
 select *from board where hit >= 0 order by title asc limit 1,3;
+<!-- 조건 > 정렬 > 제한 순서로 쿼리작성 -->
+
+12. 함수
+데이터베이스에서 제공하는 사용자편의 함수
+12-1. 날짜함수
+now(); 실행하면 어떤 값을 돌려주고,
+값을 보려면(=sysout) select now();
+12-2. 문자열함수
+문자열 결합 함수
+<!-- #숫자계산 : select 1+1; select 2*2; select 4/4; ... -->
+concat('문자1','문자2','문자3'...'문자n');
+select concat('안녕','하세요');
+
+13. 집계함수
+데이터베이스에서 제공하는 통계함수
+개수,합계,평균,최대값,최소값,....
+<!-- *NULL값은 집계에서 제외* -->
+13-1. 개수함수 <!-- 값이기 때문에 컬럼 대신에 사용. where절이 필수가 아니지만 조건조회도 가능함 -->
+select count([컬럼이름]) from [테이블이름];
+13-1-1. user테이블에서 age컬럼에 값이 들어가있는 행의 개수
+select count(age) from user;
+13-1-2. user테이블의 행 개수 <!-- 모든행의 개수를 세라 -->
+select count(*) from user;
+13-2. 평균함수 avg
+select avg([컬럼이름]) from[테이블이름]
+13-2-1. user테이블에서 age컬럼의 평균값
+select avg(age) from user;
+13-2-2. user테이블의 height컬럼 값들의 평균값
+select avg(height) from user; <!-- 반올림 함수등을 사용가능 -->
+13-2-3. user테이블의 null을 포함하여 height컬럼의 평균
+select sum(height) / count(*) from user;
+13-3. 합계함수 sum
+select sum([컬럼이름]) from [테이블];
+13-3-1. user테이블의 age컬럼의 값들의 합계
+select sum(age) from user;
+13-3-2. user테이블에서 height컬럼의 합계
+select sum(height) from user;
+13-3-3. board테이블의 hit컬럼의 값들의 합계
+select sum(hit) from board;
+13-4. 최대값함수
+select max([컬럼이름]) from [테이블이름]
+13-4-1. user테이블에서 age컬럼의 값이 제일 큰 값을 구한다.
+select max(age) from user;
+13-4-1. user테이블에서 height컬럼의 값이 제일 큰 값을 구한다.
+select max(height) from user;
+13-5. 최소값함수
+select min([컬럼이름]) from [테이블이름]
+13-5-1. user테이블에서 age컬럼의 값이 제일 작은 값을 구한다.
+select min(age) from user;
+13-5-2. user테이블에서 height컬럼의 값이 제일 작은 값을 구한다. 단, height가 null인 행에서만
+select min(height) from user where height is null;
+
+14.별칭(컬럼)
+#문법
+select [컬럼이름1 {as 별칭}, 컬럼이름2 {as 별칭}...] from [테이블이름]
+14-1. user테이블에서 모든컬럼 모든행을 조회하되, *이 아닌 직접 컬럼이름을 작성하여 조회
+select id,pw,name,age,height from user; = select *from user;
+14-2. user테이블에서 모든컬럼을 조회할 때 각 컬럼에 별칭을 부여하여 조회
+select id as 아이디,pw as 비밀번호,name as 이름,age as 나이,height as 키 from user;
+14-3. user테이블의 모든행의 개수를 구한다.
+select count(*) from user;
+14-4. user테이블의 모든 행의 개수를 구하고, 컬럼이름을 cnt로 별칭을 부여하여 조회
+select count(*) as cnt from user;
+
+그룹화 : 묶어서 통계를 구하는것
+15. 그룹화
+데이터를 특정 컬럼 기준으로 그룹화한다.
+#문법
+select [컬럼1,컬럼2...] from [테이블이름] group by [컬럼1,컬럼2...] {having 조건}
+15-1. user테이블에서 age컬럼 기준으로 그룹화하고, age컬럼의 값을 조회
+select age from user group by age;
+15-2. user테이블에서 age컬럼 기준으로 그룹화하고, id컬럼의 값을 조회(에러)
+select id from user group by age;
+15-3 user테이블에서 age컬럼 기준으로 그룹화하고, 각 그룹별 행의 개수를 조회
+select age, count(age) from user group by age;
+select age, count(*) from user group by age;
+15-4 user테이블에서 pw컬럼 기준으로 그룹화하고, pw컬럼의 값과,각 그룹별 행의 개수를 조회
+select pw, count(*) from user group by pw;
+15-5. user테이블에서 pw컬럼 기준으로 그룹화하고, pw컬럼의 값과,각 그룹별 age의 평균을 조회
+select pw, avg(age) from user group by pw;
+
+15-6. user테이블에서 pw컬럼 기준으로 그룹화하고, pw컬럼의 값을 조회하되, pw컬럼의 값이 '1234'인 행만 조회
+select pw from user where pw = '1234' group by pw;
+select pw from user group by pw where pw = '1234';(서순에러)
+<!-- 앞에서 조회한 컬럼만 가지고 그룹화한다. -->
+<!-- where절은 group by보다 먼저 나와야한다. -->
+15-7. board테이블에서 author컬럼 기준으로 그룹화하고, author컬럼의 값과, 그룹별 행의 개수를 조회
+select author, count(*) from board group by author;
+15-8. board테이블에서 author컬럼 기준으로 그룹화하고, author컬럼의 값과, 그룹별 행의 개수를 조회. 단, author가 sung이 아닌 행만 조회
+select author, count(*) from board group by author having author != 'sung';
+15-9. board테이블 author컬럼 기준 그룹화, author컬럼 값과, 그룹별 행의 개수 조회. 단, 그룹별 행의 개수가 2개 이상인 행만 조회
+select author, count(*) from board group by author having count(*) >= 2;
+
 
 <!-- 
     1. board 테이블에서 title이 '안녕하세요'인 행을 조회
@@ -224,7 +324,7 @@ select *from board where create_date >='2025-07-21 00:00:00';
 <!-- 연-월-일 시:분:초  21일이후 작성글 조회-->
  
 1. board 테이블에서 create_date컬럼의 값이 '2025-07-21 00:00:00'보다
-    크거나 같고, create_date컬럼의 값이 '2025-07-22 00:00:00'보가 
+    크거나 같고, create_date컬럼의 값이 '2025-07-22 00:00:00'보다 
     작거나 같은 행만 조회
     select *from board where create_date >='2025-07-21 00:00:00'
     and create_date <='2025-07-22 00:00:00';
@@ -236,3 +336,8 @@ select *from board where create_date >='2025-07-21 00:00:00';
 select *from board limit 1,1;
 4. board테이블에서 1번째 행부터 2개의 데이터만 조회
 select *from board limit 1,2;
+
+select id,pw,name,age,height
+집계함수는 행 연산
+사칙연산은 열 연산
+select age + height from user;
