@@ -1,0 +1,11 @@
+내용
+게시글번호
+
+create table reply(
+    rno int primary key auto_increment,
+    content varchar(255) not null,
+    bno int, foreign key(bno) references board(no) 
+);
+
+insert into reply(content, bno)
+values('댓글1',2);

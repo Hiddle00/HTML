@@ -341,3 +341,52 @@ select id,pw,name,age,height
 집계함수는 행 연산
 사칙연산은 열 연산
 select age + height from user;
+
+16. join  <!-- 중요 -->
+두개 이상의 테이블을 집합으로 만들어서 하나의 테이블처럼 조회한다.
+#문법
+select [컬럼1, 컬럼2, ...] from [테이블1] {inner | left | right} join on [테이블1.컬럼] [조건] [테이블2.컬럼]
+#inner join
+두개의 테이블을 on 절에 있는 컬럼 기준으로 교집합을 만든다.
+교집합에 속해있는 값을 가지고 있는 컬럼을 두 테이블에서 조회하고 결합
+
+select *from board inner join user on board.author = user.id;
+                   left or right
+
+16-1. user테이블과 board테이블의 모든 컬럼을 조회. 이때, user테이블의 id컬럼과 board테이블의 author컬럼 값을 기준으로 집합을 만들고 집합에 속해있는 값을 각 테이블에서 조회하여 하나의 테이블로 결합 후 조회
+select *from user inner join board on board.author = user.id;
+delete from board where author = 'lee';
+= * from user where id='hong' + *from board where author='hong'
+
+#16-2. 조인에서 조회되는 컬럼 제한
+select id, pw, name, title from user inner join board on user.id = board.author;
+#16-3. 조인에서 조회되는 컬럼 제한(특정 테이블의 모든 컬럼)
+select board.*, name from user inner join board on user.id = board.author;
+#16-4. 조인, 테이블에 별칭 부여
+select *from user u inner join board b on u.id = b.author;
+<!-- 별칭을 부여하면 이름으로는  -->
+#16-5. 조인에서 조회되는 컬럼 제한(테이블에 별칭 부여)
+select b.*, u.name from user u inner join board b on u.id = b.author;
+16-6. board테이블과 reply테이블을 inner join 하여 조회
+select *from board inner join reply on board.no = reply.bno;
+
+#left join <!-- 테이블간의 부모자식 관계 또한 성립-->
+join문장 기준으로 왼쪽 테이블을 left로 정하고 left테이블을 전부 조회하고, 교집합에 해당하는 값을 오른쪽 테이블에서 조회하여 결합한다.
+16-7. board테이블과 reply테이블을 left join하여 조회
+select *from board left join reply on board.no = reply.bno;
+16-8. board테이블과 reply테이블을 right join하여 조회
+select *from board right join reply on reply.bno = board.no;
+16-9. user테이블과 board테이블과 reply테이블을 조인하여 조회
+select u.name, b.* from board b left join user u on b.author = u.id
+right join reply r on b.no = r.bno;
+select u.name, b.*, r.rno from board b left join user u on b.author = u.id left join reply r on b.no = r.bno;
+
+17. 조인활용
+17-1. 게시글목록을 조회할 때 id대신 name을 표시
+select *from board left join user on board.author = user.id;
+17-2. 회원들이 작성한 게시글 조회
+select *from board right join user on board.author = user.id;
+17-3. 게시글 상세조회할 때 게시글에 달린 댓글도 조회
+select *from board left join reply on board.no = reply.bno where no=5;
+17-4. 댓글이 달려있는 게시글만 조회
+select *from board inner join reply on board.no = reply.bno;
