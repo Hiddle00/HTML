@@ -43,7 +43,7 @@ select title, content, author from board;
 
 3. update
 특정 컬럼의 데이터를 테이블에서 수정한다.
-
+<!-- 조회를 한 번 실행한 뒤 변경함 -->
 update [테이블이름] set [컬럼1 = 값1, 컬럼2 = 값2];
 
 3-1. user테이블의 age컬럼의 값을 25로 수정
@@ -51,7 +51,16 @@ update user set age = 25;
 3-2. user테이블의 pw컬럼의 값을 '1234'로 수정하고,
         height컬럼의 값을 178.5로 수정
 update user set pw = '1234', height = 178.5;
-
+3-3. user테이블의 pw컬럼의 값을 '1234'수정한다.
+update user set pw = '1234';
+3-4. user테이블에서 id가 hong인 행을 찾아 pw컬럼의 값을 '54321'로 수정
+update user set pw = '54321' where id = 'hong';
+3-5. user테이블에서 age가 20 이상인 행을 찾아 age컬럼의 값을 1씩 증가
+update user set age = age + 1 where age >= 20;
+3-6. board테이블에서 no가 3번인 행을 찾아 title은 수정으로, content는 수정된 본문으로 변경
+update board set title = '수정', content = '수정된 본문' where no = 3;
+3-7. board테이블에서 no가 5번인 행을 찾아 title은 '두번째 수정'으로, content는 '게시글수정', update_date는 now()로 변경
+update board set update_date = now(), title = '수정', content = '수정된 본문' where no = 5;
 4.delete
 특정 데이터를 포함하고 있는 행을 테이블에서 삭제한다.
 
@@ -63,3 +72,5 @@ delete from user;
 <!-- 하위테이블을 먼저 지워줘야 한다. -->
 4-2. board테이블의 데이터 삭제
 delete from board;
+4-3. board테이블에서 no가 11번에 해당하는 행을 삭제
+delete from board where no = 11;
