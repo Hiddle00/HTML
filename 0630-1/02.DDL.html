@@ -9,17 +9,21 @@
     SQL(Structured Queay language, 구조적 질의어)
     DBMS에서 사용하는 명령어
 
+    Create,Alter,Drop,Truncate
+
+
+
     1.DDL(Data Definition Language, 데이터 정의어)
     데이터베이스 내에서 개체(Entity, 데이터베이스, 테이블)들을 생성하거나, 수정하거나, 삭제하는 명령어들의 집합
 
-    1-1.CREATE
+    1.CREATE
     새로운 개체를 생성하는 명령어
-    1-1-1.데이터베이스 개체 생성
+    1-1.데이터베이스 개체 생성
     create database {if not exists} [데이터베이스이름] {incording}
     --실제
     create database ezen;
     ezen이라는 이름의 데이터베이스 생성
-    1-1-2. 테이블 개체 생성
+    1-2. 테이블 개체 생성
     create table {if not exists} [테이블이름](
     [컬럼이름1] [데이터타입] {제약조건},
     [컬럼이름2] [데이터타입] {제약조건},
@@ -150,23 +154,118 @@
     insert into board(title, content, author)values('2025년7월21일','오후2시','sung');
 
 
-    1-2.DROP
+    2.DROP
     개체를 삭제하는 명령어
     
-    1-2-1.데이터베이스 삭제
+    2-1.데이터베이스 삭제
     drop database {if exists} [데이터베이스이름] 
     --실제
     drop database ezen;
     ezen이라는 이름의 데이터베이스 삭제
 
-    1-2-2. 테이블 삭제
+    2-2. 테이블 삭제
     drop table {if exists} [테이블이름]
     --실제
     drop table board;
-    1-3.ALTER
-    개체를 수정하는 명령어
-    1-4.TRUNCATE
+
+    3.ALTER
+    개체의 구조를 수정하는 명령어
+    구조수정 -> 컬럼삭제, 컬럼추가, 컬럼이름 변경, 컬럼타입 변경,제약조건추가 등등
+    3-1. 컬럼추가
+    #문법
+    alter table [테이블이름] add [추가할 컬럼이름][컬럼데이터타입]{제약조건}
+    3-1-1. user테이블에 nick컬럼 추가
+    alter table user add nick varchar(255);
+    3-1-2. user테이블에 email컬럼 추가
+    alter table user add email varchar(255) not null;
+    <!-- varchar의 기본값인 빈문자를 채워넣는다. -->
+    3-2. 컬럼수정(데이터타입,제약조건)
+    alter table [테이블이름] modify [수정할 컬럼이름][수정할 컬럼타입]{제약조건}
+    3-2-1. user테이블의 email컬럼의 데이터타입을 text로 변경하고 null조건으로 변경
+    alter table user modify email text; 
+    <!-- #데이터 타입만 변경하고 싶어도 기존 데이터타입을 다시 명시해야함 -->
+    3-2-2. user table의 nick컬럼의 데이터타입을 int로 변경하고 외 제약조건 유지
+    alter table user modify nick int;
+    <!-- 
+    컬럼의 데이터 타입을 변경할때 변경할 데이터타입과 맞지않는 값이 기존에 존재한다면 변경이 불가능 
+    #해결방법 -> 기존컬럼의 값을 변경할 데이터타입에 맞게 바꾸거나 /null로 변경
+    -->alter table user modify nick int not null;
+    update user set nick = null;
+    #그리고 다시 실행
+    #null이 컬럼에 들어가있을 때 제약조건을 not null로 변경
+    #해당 컬럼의 모든 값을 데이터타입에 맞게 수정 후 변경
+    update user set nick = 0;
+    alter table user modify nick int not null;
+    <!-- 문자열타입이라면 ''등으로 빈문자를 넣어야한다. -->
+    3-3. 컬럼 이름변경
+    #문법
+    alter table [테이블이름] change [원래컬럼이름][바꿀컬럼이름][데이터타입];
+    3-3-1. user테이블의 nick컬럼을 nickname컬럼으로 변경
+    alter table user change nick nickname int;
+    3-4.컬럼삭제
+    #문법
+    alter table [테이블이름] drop column [삭제할컬럼이름];
+    3-4-1. user테이블에서 nickname컬럼 삭제
+    alter table user drop column nickname;
+    3-4-2. user테이블에서 email컬럼 삭제
+    alter table user drop column email;
+    3-4-3. board테이블에서 author컬럼 삭제
+    alter table board drop column author;
+    #제약조건(pk,fk)가 걸려있는 컬럼은 삭제가 불가능
+
+    3-5. 제약조건 삭제
+    #문법
+    alter table [테이블이름] drop [제약조건이름]
+    <!-- 제약조건 이름을 명시하지 않고 만들면 임의의 값을 부여한다. -->
+    3-5-1. board테이블의 primary key 제약조건 삭제
+    alter table board drop primary key;
+    #board테이블의 primary key 컬럼을 참조하여 외래키(fk)로 사용하는 테이블이 있기 때문에 삭제불가
+    3-5-2. reply테이블의 primary key 제약조건 삭제
+    alter table reply drop primary key;
+    desc reply;
+    #auto auto_increment제약조건이 들어간 컬럼은 pk삭제가 불가능
+    3-5-3. test테이블의 primary key제약조건 삭제
+    alter table test drop primary key;
+    3-6.제약조건 추가
+    #문법
+    alter table [테이블이름] add constraint {제약조건}[제약조건]
+    3-6-1. test테이블의 id컬럼에 primary key제약조건추가
+    alter table test add constraint primary key(id);
+    delete from test where id = 'a';
+    3-7. 테이블 이름변경
+    #문법
+    alter table [테이블이름] rename to [변경할 테이블이름];
+    3-7-1. test테이블의 이름을 test2로 변경
+    alter table test rename to test2;
+
+    4.TRUNCATE
     개체를 재생성(삭제 후 생성)하는 명령어
+    개체를 drop 후 create
+    #문법
+    truncate table [테이블이름];
+    <!-- 테이블이나 뷰에서만 가능하다(스키마는x) -->
+    #test2테이블 drop
+    drop table $test2;
+    #test 테이블 create
+    create table test(
+        id varchar(255) primary key,
+        body varchar(255)
+    );
+    insert into test(id) values('a');
+    insert into test(id) values('b');
+    4-1. test테이블 truncate
+    truncate table test;
+    select *from test;
+    4-2. reply테이블 truncate
+    #select *from reply;
+    #insert into reply(content, bno) values('테스트1',3);
+    #insert into reply(content, bno) values('테스트2',3);
+    #delete from reply;
+    #insert into reply(content, bno) values('테스트',3);
+    #select *from reply;
+    truncate table reply;
+<!-- 보통 auto_increment를 초기화 하는 용도로 사용한다. -->
+
 
     2.DML(Data Manipulcation Language, 데이터 조작어)
     3.DCL(Data Control Language, 데이터 제어어)
@@ -190,6 +289,8 @@
         foreign key:외래키.해당컬럼에 올 수 있는 값은 반드시 다른 테이블의 참조하고 있는 컬럼의 값중에 하나여야 한다.(참조키)
         테이블간의 관계를 맺어주는 rDBMS의 메인.
 
+    drop구조 delete 값
+    change이름 modify구조 update값
 
 
     게시판
@@ -230,5 +331,20 @@
     회원정보 저장공간 (로그인 사용자만 가능하다면)
     댓글 저장공간
     즐겨찾기 저장공간
+
+    user테이블의 nick컬럼의 값을 'hgd'로 수정
+    update user set nick = 'hgd' {where id = 'hong'};
+    user테이블의 email값을 'hgd@example.com'으로 수정
+    update user set email = 'hgd@example.com' {where id = 'hong'};
+    update user set email='hgd@example.com',nick='hgd' where id = 'hong';
+
+    test
+    create table test(
+        id varchar(255) primary key,
+        body varchar(255)
+    );
+
+    insert into test(id)
+    values('a');
 </body>
 </html>
