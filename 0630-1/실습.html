@@ -1,0 +1,118 @@
+게시판 데이터베이스
+
+회원테이블   user테이블
+아이디      id              varchar(255)    primary key
+비밀번호    pw              varchar(255)    not null
+이름        name            varchar(255)    not null
+닉네임      nick            varchar(255)    not null unique key
+이메일      email           varchar(255)    not null unique key
+생년월일    birth           timestamp       not null
+성별        gender          char(1)         not null
+핸드폰번호   phone          varchar(13)
+우편번호    zip_code        char(5)
+주소1       addr1           varchar(255)
+주소2       addr2           varchar(255)
+자기소개    intro           varchar(255)
+탈퇴여부    delyn           char(1)         default 'N'
+가입일      create_date     timestamp       default now() not null
+수정일      update_date     timestamp
+회원타입    user_type       int             default 1
+0 -> 관리자 / 1 -> 일반 / 2 -> 탈퇴
+
+create table user(
+    id varchar(255) primary key,
+    pw varchar(255) not null,
+    name varchar(255) not null,
+    nick varchar(255) not null ,
+    email varchar(255) not null,
+    birth timestamp not null,
+    gender char(1) not null,
+    phone varchar(13),
+    zip_code char(5),
+    addr1 varchar(255),
+    addr2 varchar(255),
+    intro varchar(255),
+    delyn char(1) default 'N',
+    create_date timestamp default now(),
+    update_date timestamp,
+    user_type int default 1,
+    unique key (nick),
+    unique key (email)
+
+);
+
+
+게시글테이블    post테이블
+글번호          pno         int             primary key auto_increment
+제목            title       varchar(255)    not null
+본문            body        text            not null
+게시판타입      post_type   int             not null
+0 -> 공지 / 1 -> 자유 / 2 -> 게임 등등
+작성자          author      varchar(255)    foreign key
+작성일          create_date timestamp       default now()
+수정일          update_date timestamp       
+삭제일          delete_date timestamp       
+
+create table post(
+    pno int primary key auto_increment,
+    title varchar(255) not null,
+    body text not null,
+    post_type int not null,
+    author varchar(255),
+    create_date timestamp default now(),
+    update_date timestamp,
+    delete_date timestamp,
+    foreign key(author) references user(id)
+);
+
+댓글테이블  reply테이블
+댓글번호    rno         int             primary key auto_increment
+내용        rcon        varchar(255)    not null
+작성자      rauth       varchar(255)    foreign key
+게시글번호  pno         int             foreign key
+작성일      create_date timestamp       default now()
+수정일      update_date timestamp       
+
+부모댓글번호
+삭제일
+
+create table reply(
+    rno int primary key auto_increment,
+    rcon varchar(255) not null,
+    rauth varchar(255),
+    pno int,
+    create_date timestamp default now(),
+    update_date timestamp,
+    foreign key(rauth) references user(id),
+    foreign key(pno) references post(pno)
+);
+
+
+파일테이블      file테이블
+파일번호        fno           int           primary key auto_increment
+업로드경로      upload_location  varchar(255)   not null
+
+파일원본이름    original_name    varchar(255)   not null
+"a.txt"
+파일업로드이름  real_name        varchar(255)   not null
+"a(2).txt"
+게시글번호      pno             int             foreign key
+생성일          create_date     timestamp       default now()
+
+create table file(
+    fno int primary key auto_increment,
+    upload_location varchar(255) not null,
+    original_name varchar(255) not null,
+    real_name varchar(255) not null,
+    pno int,
+    create_date timestamp default now(),
+    foreign key(pno) references post(pno)
+);
+
+
+
+
+
+조회수테이블 - 한 번 본 게시글에 조회수가 다시 오르지 않기 위해선 테이블을 따로 만들어 관리해야한다. 아래도 비슷.
+좋아요테이블
+싫어요테이블
