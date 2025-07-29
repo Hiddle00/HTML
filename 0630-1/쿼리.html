@@ -1,0 +1,82 @@
+
+user
+회원가입
+insert into user(id, pw, name, nick, email, birth, gender) values('hong', '1234', '홍길동', 'hgd', 'hong@example.com', '2000-01-01', 'M');
+
+insert into user(id, pw, name, nick, email, birth, gender, intro) values('jeon', '1234', '전우치', 'jwc', 'jeon@example.com', '1997-02-18', 'M', '안녕하세요');
+
+로그인
+select id, nick from user where id = 'hong' and pw = '4321' and delyn = 'N';
+
+--전우치 로그인 쿼리
+select id, nick from user where id = 'jeon' and pw = '1234';
+
+회원정보수정
+홍길동의 비밀번호와 자기소개 변경
+update user set pw = '4321', intro = '자기소개' where id = 'hong'
+--전우치의 닉네임을 wc로 변경하고, pw를 a1234로 변경하고, phone을 01011111111로 변경
+update user set nick = 'wc', pw = 'a1234', phone = '01011111111', update_date = now() where id = 'jeon';
+회원탈퇴
+delete -> update
+delyn컬럼의 값을 'Y'로 변경해 탈퇴처리
+
+--홍길동 회원 탈퇴
+update user set delyn = 'Y' where id = 'hong';
+
+
+post
+글쓰기
+insert into post(title, body, post_type, author) values('첫번째 게시글', '게시글 본문' , 1, 'hong');
+
+insert into post(title, body, post_type, author) values('두번째 게시글', '게시글' , 1, 'jeon');
+
+insert into post(title, body, post_type, author) values('세번째 게시글', '본문' , 2, 'hong');
+
+글조회
+- 목록조회
+select *from post;
+
+- 자게 목록조회
+select *from post where post_type = 1;
+- 공지 목록조회
+select *from post where post_type = 0;
+- 겜게 목록조회 (필요한 컬럼만) + 삭제 안된 게시글만
+select pno, title, author, create_date from post where post_type = 2 and delete_date is null;
+
+- 자유게시판 목록 조회(필요한 컬럼만) + 삭제 안된 게시글 + 작성자의 닉네임도 조회(join) <!--  -->
+select pno, title, nick, p.create_date from post p left join user u on p.author = u.id where post_type = 1 and delete_date is null;
+
+- 자유게시판 목록 조회(필요한 컬럼만) + 삭제 안된 게시글 + 작성자의 닉네임도 조회(join) + 게시글에 달려있는 댓글 개수 <!--  -->
+select pno, title, nick, p.create_date, (select count(*) from reply where pno = p.pno) as cnt from post p left join user u on p.author = u.id where post_type = 1 and delete_date is null;
+
+상세조회(단건조회)
+- 1번 게시글 상세조회
+select *from post where pno = 1 and delete_date is null;
+
+글수정
+- 1번 게시글의 제목을 '수정된 게시글'로 변경하고, body를 '수정됨'으로 변경하고 update_date를 now()로 변경
+update post set title = '수정된 게시글', body = '수정됨', update_date = now() where pno = 1;
+글삭제
+- 2번 게시글 삭제
+update post set delete_date = now() where pno = 2;
+
+
+reply
+댓글쓰기
+hong이 1번 게시글에 '안녕하세요'라고 댓글 작성
+insert into reply(rcon, rauth, pno) values('안녕하세요', 'hong', 1);
+- jeon이 3번 게시글에 '반갑습니다'라고 댓글 작성
+insert into reply(rcon, rauth, pno) values('반갑습니다', 'jeon', 3);
+댓글조회
+- 1번 게시슬에 달린 댓글 목록 조회
+select *from reply where pno = 1;
+
+댓글수정
+- 1번 댓글의 rcon을 '댓글 수정'으로 변경
+update reply set rcon = '댓글 수정', update_date = now() where rno = 1;
+댓글삭제
+- 2번 댓글 삭제
+delete from reply where rno = 2;
+
+
+file
