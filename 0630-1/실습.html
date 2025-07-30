@@ -114,6 +114,39 @@ create table file(
 
 
 조회수테이블 - 한 번 본 게시글에 조회수가 다시 오르지 않기 위해선 테이블을 따로 만들어 관리해야한다. 아래도 비슷.
-좋아요테이블
+사용자      id      varchar(255)/fk,pk    
+게시글번호   pno     int/fk,pk             
+(조회일)
+create table hit(
+    id varchar(255), pno int, primary key(id, pno), foreign key(id) references user(id), foreign key(pno) references post(pno)
+);
+
+좋아요테이블    likes
+사용자          id      varchar(255)    pk,fk
+게시글번호      pno     int             pk,fk
+create table likes(
+    id varchar(255), pno int, primary key(id, pno), foreign key(id)
+    references user(id), foreign key(pno) references post(pno)
+);
+
 싫어요테이블
 
+복합키 테이블
+create table test(no int, id varchar(255), primary key(no, id));
+insert into test(no, id) values(1, 'hong');
+insert into test(no, id) values(1, 'jeon');
+insert into test(no, id) values(2, 'hong');
+insert into test(no, id) values(1, 'hong');
+
+
+
+
+정보처리기사 자격증 - 1.4년제 대졸 2.2년제졸 + 4대2년가입이력
+                   - 필기 + 실기 5과목 20문*5 40이하 과락 평균60
+                   - 실기 20문 주관식
+빅데이터기사 결측값?
+sqld(2년) & sqlp(기간x) 대전,광주
+MCF 2~3년 유효기간
+리눅스마스터
+네트워크 관리사 2급(공인) 1급(민간)
+aws자격증 - 클라우드 비용
