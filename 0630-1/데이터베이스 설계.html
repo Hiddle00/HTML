@@ -72,3 +72,27 @@ select *from board where bno = 1;
 select board.*,(select count(*) from reply where bno = board.bno) as cnt, user.nick from board left join user on board.author = user.id where bno = 1;
 
 (select count(*) from reply where bno = board.bno) as cnt
+
+11. id가 hong인 유저가 1번 게시글에 '안녕하세요'로 댓글을 작성
+insert into reply(rauth, bno, rcon) values('hong', '1', '안녕하세요');
+
+12. id가 jeon인 유저가 1번 게시글에 '반갑습니다'로 댓글을 작성
+insert into reply(rauth, bno, rcon) values('jeon', '1', '반갑습니다');
+
+13. 1번 게시글에 달린 댓글들 조회
+select *from reply where bno = 1;
+
+14. id가 hong인 유저가 작성한 댓글들 조회
+select *from reply where rauth = 'hong';
+
+15. 1번 댓글의 내용을 '수정된 댓글'로 변경
+update reply set rcon = '수정된 댓글' where rno = '1';
+
+16 - 1. 1번 게시글에 달린 댓글들 조회(회원의 nick도 같이 조회)
+select reply.*, user.nick from reply left join user on rauth = id where bno = 1;
+
+16 - 2. 
+select *, (select nick from user where id = rauth) as nick from reply where bno = 1; 
+
+17. 1번 댓글 삭제
+delete from reply where rno = 1;

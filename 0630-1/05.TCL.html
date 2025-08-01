@@ -1,0 +1,38 @@
+TCL(Transaction Control Language,트랜젝션 제어어)
+데이터베이스에서 수행되는 작업의 단위. 중간에 실패한다면 되돌아가고 성공하면 영구 반영한다.
+일단 트랜젝션이 시작하면 완료까지 다른 작업이 끼어들 수 없다.
+
+트랜젝션의 특성
+1. 원자성(Atomcity)
+트랜젝션 내의 모든 작업이 완전히 수행되거나 수행되지 않은 상태로 유지되어야 한다.
+2. 일관성(Consistency)
+트랜젝션이 완료되면 데이터베이스는 항상 일관된 상태를 유지해야한다.
+수행 전후가, ex.잔액이 일치해야한다.
+3. 격리성(Isolation)
+동시에 실행되는 트랜젝션들이 서로의 작업에 영향을 미치지 않아야 한다.
+4. 지속성, 영속성(Durability)
+트랜젝션이 완료되면 그 결과는 영구적으로 저장되어야 한다.
+
+TCL
+mysql에서는 자동커밋(autocommit)이 활성화 되어있기 때문에 별도의 commit 명령어 없이 insert, update, delete 쿼리의 실행결과가 바로 반영됨
+#여부확인
+select @@autocommit; 1이면 활성화,0이면 비활성화
+#여부변경
+set autocommit = 0;
+
+1.commit
+트랜젝션 내에서 수행된 모든 변경사항을 데이터베이스에 영구적으로 반영
+1-1. reply테이블에 데이터 추가
+insert into reply(rauth, bno, rcon) values('hong', 1, '1번' );
+
+2.rollback
+트랜젝션 내에서 수행된 모든 변경사항을 취소한다. 변경 내용을 원래 상태로 되돌린다.
+2-1. reply테이블에 데이터추가
+insert into reply(rauth, bno, rcon) values('hong', '1', '두번째');
+
+2-2. reply테이블의 모든 데이터 삭제
+delete from reply;
+select *from reply;
+rollback;
+select *from reply;
+3.savepoint
