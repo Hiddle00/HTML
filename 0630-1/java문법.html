@@ -1,0 +1,37 @@
+<script>
+
+//스캐너
+import java.util.Scanner;
+Scanner scanner = new Scanner(System.in);
+System.out.print("입력 : ");
+int n = scanner.nextInt();
+
+//랜덤숫자
+import java.util.Random;
+random.setSeed(System.currentTimeMillis());
+int number = random.nextInt(45); // 0 ~ 44 까지의 무작위 int 값 리턴 
+
+//흐름제어구문
+break;
+return;
+continue;
+
+//배열 인덱스를 변수로 관리하는 예제 & 정수타입 변환
+String[] score = {"1,000", "22,000", "45,000", "3,000"};
+int max = 0;
+for(int i = 0; i < score.length; i++)
+{
+    String x = score[max].replace(",","");
+    String y = score[i].replace(",","");
+    if(Integer.parseInt(x) < Integer.parseInt(y))
+    {
+        max = i;
+    }
+}
+System.out.println(score[max]);
+
+//객체 타입확인
+boolean b = instanceof
+
+
+</script>
