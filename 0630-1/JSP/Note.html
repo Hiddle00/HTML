@@ -16,7 +16,27 @@
     (Tocat, Web2B, JBoss, Jetty, Resin, IIS, Oracle)
     데이터베이스와 언어가 다른 서비스들
 
-    JSP(Java Server Pages) 템플릿기반
+    서블릿 <!-- 서버의 조각? -->
+    .HttpServlet 클래스를 상속
+    doGet(), doPost()
+    request,response
+    @WebServlet("/ezen.do")//URL Mapper
 
+    JSP(Java Server Pages) 템플릿기반
+    HTML파일에 java코드를 끼워넣는다 --> 스크립틀릿
+
+    브라우저(chrome)가 웹서버(tomcat 9.0)에 링크로 요청
+    -> 웹서버는 서블릿(4.0) 라이브러리에 요청 전달
+    서블릿은 index.jsp를 메모리에 로딩
+    index.jsp를 java 클래스로 변환(소스코드-컴파일-서블릿객체-)
+    출력물을 웹서버에게 전달
+    웹서버는 브라우저에게 리턴
+
+    브라우저 request(요청) accept,user-agent 등등 헤더에 포함 -> 서버
+    <- response(응답) content-type,connection,keep-alive 등등
+    <- 문서 내용
+
+    <%@ include file="sub.jsp" %>
+    네비게이션과 풋터 를 외부에서 끌어와 연결   
 </body>
 </html>
