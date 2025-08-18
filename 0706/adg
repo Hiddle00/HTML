@@ -1,37 +1,20 @@
-(domain)#%#
-(
-    function()
-    {
-        var a=
-        {
-            debug:
-            {
-                set:function()
-                {
-                    return a
-                }
-            },on:function(b,c)
-            {
+(domain)#%#(function(){
+        var a={
+            debug:{
+                set:function(){return a}},
+            on:function(b,c){
                 b||setTimeout(function(){c()},1);
-                return a
-            },onDetected:function(b)
-            {
-                return a.on(!0,b)
-            },onNotDetected:function(b)
-            {
-                return a.on(!1,b)
-            },check:function(){}
-        };
-        Object.defineProperty
-        (
+                return a},
+            onDetected:function(b){
+                return a.on(!0,b)},
+            onNotDetected:function(b){
+                return a.on(!1,b)},
+            check:function(){}
+            };
+        Object.defineProperty(
             window,
-            "fuckAdBlock",
-            {
-                get:function()
-                {
-                    return a
-                }
-            }
+            "fuckAdBlock", 
+            {get:function(){return a}}
         )
     }
 )();
