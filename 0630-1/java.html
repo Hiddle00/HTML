@@ -255,14 +255,37 @@ List
 ArrayList (unsafe)
 배열에서는 .length지만 컬렉션에선 .size
 .get()으로 배열
+vector
 
 Set 키(중복불가)를 가지며 순서를 가지지 않고 저장
 
 Map 키와 값을 가지며 순서를 가지지 않고 저장
 
+hash
+데이터(키)를 해시함수로 처리하는것 나온 값을 테이블에 등록?
+해시함수를 호출하면 한 번에 찾아진다 검색속도가 빨라짐
+같은 키를 사용하면 항상 같은 값이 나온다 
+무결성 - 1비트라도 달라지면 값이 달라진다.
+백신 - 프로그램의 해시값을 가지고 있는다. 해시값을 호출. 프로그램이 변조되면 다른 해시값이 나온다.
 
 
+JavaEx26
+ERD
 
+논리설계 : 논리적 이름 (의사코드)
+이름(문자열)
+학번(문자열)
+물리설계 : 물리적 이름 (실제코딩)
+name varchar(20) var(20) ntext(20) 
+
+java에서는 db에 연결하기 위한 도구를 제공하지 않음
+= DBMS회사에서 제공하는 java라이브러리가 필요함
+= jar or driver(드라이버,라이브러리)
+
+
+ip, port, id & pw, db name
+mysql서버정보,id(root),pw(ezen)
+jdbc(Java Database Connectivity)프로토콜//localhost:3306/memodb
 </body>
 </html>
 
@@ -279,3 +302,11 @@ html 125p ~ 149p
 0814
 12장(자습)
 13,14,15,20 예습
+
+https://brilliantdevelop.tistory.com/54
+
+
+
+정보처리기사 공부
+자바로 쓴 자료구조
+배열, 알고리즘, 등등
