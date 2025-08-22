@@ -43,5 +43,13 @@ if(b){}
         throw new Exception("msg");}
 }
 
+//인코딩 변환
+request.setCharacterEncoding("euc-kr");
+//되돌려보내는 리다이렉트
+response.sendRedirect("insert.jsp");
 
+//작은 따옴표 1개를 작은 따옴표 2개로 변환.
+public String _R(String value) {
+    return value.replace("'", "''");
+}
 </script>
