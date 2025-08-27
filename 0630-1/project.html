@@ -22,8 +22,34 @@ jQurey,AJax,spring prame
 내 댓글은 삭제버튼
 페이징, 댓글 수 , 조회수
 
-2. DB설계
-3. include
+2. DB설계 > erd > 구문작성
+3. include 공통부분 합산
+
+0827
+BoardEx04
+1.input 요소 이름 달기 (전송되는 이름 통일)
+required 표준이 아님 보통 사용하지 않음
+2.ui구현
+focus, validation(유효성체크)
+이벤트리스너,핸들러
+
+백엔드 구현
+2.누락값체크 리다이렉트
+1.인코딩변환
+3.잘 받아지는지 확인 임시코드작성
+String[] s = getParameterValues("s");
+
+3.5. 
+아이디 중복검사
+
+4.회원데이터 DB에 전송
+객체생성, 구문작성
+데이터암호화: select hex(aes_encrypt('원문','키'));
+데이터복호화: select aes_decrypt(unhex('암호문'),'키');
+select md5('원문');
+
+
+
 
 
 
