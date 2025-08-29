@@ -338,6 +338,24 @@ BoardEx04
 
 java는 서버가 구동
 jsp는 서블릿 모듈이 구동
+
+select count(*) from board;
+
+select kind,count(kind)
+from board
+group by kind //kind로 그룹핑
+
+
+select no, title, date(wdate) as wdate, hit
+(select userid from user where userid = board.userid) as name,
+(select count(*) from reply where no = board.no) as rcount
+from board
+order by no desc
+
+<!-- 스크롤페이징 -->
+블럭페이징
+1~9, 10~ 19, 20~ 29
+
 </body>
 </html>
 
