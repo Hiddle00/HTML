@@ -405,6 +405,26 @@ board04 프로그램 구현 복습{
     include
 }
 "자바 mvc 패턴 기초" 검색 학습
+
+SpringEx02
+DI(dependency injection) 의존관계 주입
+ex. 클래스가 생성될때 파라미터로 외부 객체가 필요해지면 스스로는 생성될 수 없고 외부객체가 반드시 필요해지는것
+public Car{
+    Engine engine;
+
+    //public void setEngine(Engine eng){ engine = eng}
+    public void Run(){
+        engine.start()
+        System.out.print("run");
+    }
+}
+public static void main(String[] args) {
+    Car sonata = new Car();
+    //setEngine(eng);
+    sonata.Run();
+}
+
+IOC
 </body>
 </html>
 
