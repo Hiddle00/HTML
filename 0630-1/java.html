@@ -465,14 +465,42 @@ required=false 없어도 진행
 설계
 기획
 명세
-UML
-
+UML(unified통합 모델링 언어)
+시스템에서 제공해야하는 기능이나 명세한 다이어그램
 유스케이스 다이어그램
 (사용자의 행동 정의)
 비즈니스 로직(업무에 관련된 기능)의 범위를 정하는
 사용자 인터렉션(어떤 행동)
 유스케이스(usecase)
 사용자 입장에서 바라본 시스템의 기능
+
+0908
+web root 밑에 있는 파일만 서비스. 그 외엔 접근불가
+web context
+Spring regacy prject - MVC prject
+project - Web project setting - context root 
+web.xml - encoding setting
+pom.xml - mybatis,spring,mysql
+root-context.xml - namespace,beans,context:component-scan
+mapper - namespace,qurey
+HomeController - contextpath,annotation,return
+
+pom밑의 라이브러리를 스프링이 참고해서 서버를 구동
+dependencise 아래 dependency에 라이브러리 세팅
+-자동화가 mvc템플릿 선택해서 만드는것
+메이븐은 라이브러리 자동화
+컴포넌트 세팅 어노테이션 선언
+annotation-driven 어노테이션을 처리하기 위한 선언(servlet)
+config안에 매퍼 위치도 지정
+classpath* - 
+매퍼가 한개 파일이면 다른사용자는 수정,삭제가 안되서 작업이 어려움
+id가 같아도 디렉토리를 다르게 주면 얼마든지 같은 id로 작업가능
+
+
+시퀀스 다이어그램
+어떠한 순서로 어떤 객체글과 어떻게 상호작용하는지
+하나의 유즈케이스가 하나의 시퀀스 다이어그램과 매칭
+
 <<스테레오>>
 
 </body>
