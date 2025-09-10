@@ -63,5 +63,20 @@ session.setAttribute("login", null);
 <%@ page session="false" %>
 //jstl 사용구문
 
-@RequestParam(required = false, defaultValue = "1")
+//매개변수를 직접 받는 코드
+@RequestParam(required = false, defaultValue = "1")타입 변수
+주는 변수와 받는 변수 이름이 같다면 @생략 가능
+ex) @RequestParam(required = false, defaultValue = "1")String id
+   =String id
+
+//for
+MemoVO vo = new MemoVO();
+vo.setNote("내용입니다.");
+
+for(int i = 1; i <= 477; i++){
+String title = String.format("[%03d]번 제목입니다.",i);
+vo.setTitle(title);
+session.insert(namespace + ".insert", vo);
+}
+response.sendRedirect("view.do?no=" + vo.getNo());
 </script>

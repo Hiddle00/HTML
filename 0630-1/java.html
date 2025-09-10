@@ -475,6 +475,7 @@ UML(unified통합 모델링 언어)
 사용자 입장에서 바라본 시스템의 기능
 
 0908
+SpringEx11
 web root 밑에 있는 파일만 서비스. 그 외엔 접근불가
 web context
 Spring regacy prject - MVC prject
@@ -512,6 +513,20 @@ controller 디버깅
 
 mybatis useGeneratedKeys
 
+SpringEx12
+filter 스프링의 입출력단에서 동작하는 웹서버
+DispatcherServlet 모델과 뷰를 엮어줌 메소드에서 요청하는 파라미터를 
+
+객체 지향의 문제점
+공통 작업을 객체로 다루면 작업이 너무 번거로워진다
+
+기능을 따로 만들어 특정 타이밍에 그 기능으로 이동해 처리한뒤 
+filter > interceptor > aop
+
+<mapping path="/**"/>
+<mapping path="ezen.control.*"/> ~패키지에만 적용
+1 = 로그인검증
+2 = 로거
 </body>
 </html>
 
