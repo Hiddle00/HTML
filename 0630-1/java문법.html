@@ -68,6 +68,8 @@ session.setAttribute("login", null);
 주는 변수와 받는 변수 이름이 같다면 @생략 가능
 ex) @RequestParam(required = false, defaultValue = "1")String id
    =String id
+@RequestParam("no")String x
+파라미터 no로 들어오는 값을 x에 대입
 
 //for
 MemoVO vo = new MemoVO();
