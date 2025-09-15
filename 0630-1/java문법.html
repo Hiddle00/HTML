@@ -60,7 +60,7 @@ session.setAttribute("login", null);
 
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="false" %> //session을 허용하지 않음
 //jstl 사용구문
 
 //매개변수를 직접 받는 코드
@@ -82,3 +82,6 @@ session.insert(namespace + ".insert", vo);
 }
 response.sendRedirect("view.do?no=" + vo.getNo());
 </script>
+
+<c:if test="${ sessionScope.login }">
+</c:if>
