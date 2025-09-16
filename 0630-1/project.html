@@ -65,5 +65,61 @@ session.invalidate();
     <br>
     <img src="down.jsp?uuid=<%= bpname %>&name=<%= bfname %>">
 style="" -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SpringEx14
+
+
+
+
+
+----------------게시물------------------
+백엔드
+vo
+service
+	로그인
+	아이디 체크
+boardservice
+	게시물 정보 등록
+		매퍼 -> insert -> 게시물 번호 자동 생성값(usegeneratekeys,키변수=no
+		첨부파일 등록 nulll처리 (if문 사용 가능)
+        testcontroller 프론트에서 값이 넘어온다 가정하고 테스트
+	단건 조회(읽기)
+	
+	페이징
+	전체 게시물 개수
+	게시물 목록
+	
+	게시물 정보 변경
+	게시물 삭제 -> 댓글 모두 지운후 게시글 삭제처리
+	
+
+	댓글
+	등록
+	목록조회
+	삭제
+	(수정)
+	
+(실무에선 매퍼를 나눠서 사용하는 경우가 많다 mapper.reply, mapper.board
+
+
+SearchVO 
+    필요에 의해 수정
+    -> 페이징도 같이 관리
+
+controller로 자료를 관리하는걸 핸들링
+
 </body>
 </html>
